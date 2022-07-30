@@ -1,8 +1,10 @@
 import { Link, usePage } from "@inertiajs/inertia-react"
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
  function Sidebar() {
-    console.log(usePage());
+    const url = usePage().url.split('/')[2];
+    console.log(url);
+    
     return (
         <>
             <aside className="fixed z-50 w-[300px] h-full">
@@ -16,7 +18,7 @@ import { memo } from "react";
                         {/* <!-- Menu --> */}
                         <div>
                             <div className="text-gray-1 text-sm mb-4">Menu</div>
-                            <Link href={route('prototype.dashboard')} className="side-link active">
+                            <Link href={route('prototype.dashboard')} className={`side-link ${url === 'dashboard' ? 'active' : ''}`}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g id="Iconly/Bulk/Home">
@@ -58,7 +60,7 @@ import { memo } from "react";
                         {/* <!-- Others --> */}
                         <div>
                             <div className="text-gray-1 side-link mb-4">Others</div>
-                            <Link href={route('prototype.payments')} className="side-link">
+                            <Link href={route('prototype.payments')} className={`side-link ${url === 'payments' ? 'active' : ''}`}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fillRule="evenodd" clipRule="evenodd"

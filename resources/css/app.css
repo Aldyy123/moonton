@@ -1,6 +1,7 @@
 @import 'input.css';
 @import 'button.css';
 @import 'sidebar.css';
+@import 'pricing.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

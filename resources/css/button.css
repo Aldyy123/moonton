@@ -16,5 +16,5 @@
     @apply text-white border border-white !important;
 }
 .btn-white-outline{
-    @apply text-white outline outline-white !important;
+    @apply text-black outline outline-white !important;
 }
