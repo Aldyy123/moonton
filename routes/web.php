@@ -37,6 +37,10 @@ Route::prefix('prototype')->name('prototype.')->group(function () {
     Route::get('/payments', function () {
         return Inertia::render('Prototype/Payments');
     })->name('payments');
+
+    Route::get('/movie/{slug}', function () {
+        return Inertia::render('Prototype/Movie/Show');
+    })->name('movie.show');
 });
 
 require __DIR__ . '/auth.php';
