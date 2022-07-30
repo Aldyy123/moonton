@@ -1,0 +1,6 @@
+.subcribe-primary{
+    @apply outline outline-1 outline-[#F1F1F1] rounded-[26px] text-white w-[300px] bg-black;
+}
+.subcribe-light-outline{
+    @apply outline outline-1 outline-[#F1F1F1] rounded-[26px] text-black w-[300px] h-[max-content];
+}
