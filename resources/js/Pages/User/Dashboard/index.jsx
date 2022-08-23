@@ -1,23 +1,70 @@
-import React from 'react';
-import Authenticated from '@/Layouts/Authenticated';
-import { Head } from '@inertiajs/inertia-react';
+import Authenticated from '@/Layouts/Authenticated/index'
+import { Head } from '@inertiajs/inertia-react'
+import Flickity from 'react-flickity-component'
+import FeaturedMovie from '@/Components/FeaturedMovie'
+import MovieCard from '@/Components/MovieCard'
+import { memo } from 'react'
 
-export default function Dashboard(props) {
+function Dashboard({auth}) {
+    const flickityOptions = {
+        "cellAlign": "left",
+        "contain": true,
+        "groupCells": 1,
+        "wrapAround": false,
+        "pageDots": false,
+        "prevNextButtons": false,
+        "draggable": ">1"
+    }
     return (
-        <Authenticated
-            auth={props.auth}
-            errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
-        >
-            <Head title="Dashboard" />
+        <>
+            <Head>
+                <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
+            </Head>
+            <Authenticated auth={auth}>
+                <div>
+                    <div className="font-semibold text-[22px] text-black mb-4">Featured Movies</div>
+                    <Flickity className="gap-[30px]"
+                        elementType={'div'} // default 'div'
+                        options={flickityOptions} // takes flickity options {}
+                        disableImagesLoaded={false} // default false
+                        reloadOnUpdate // default false
+                        static // default false
+                    >
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">You're logged in!</div>
-                    </div>
+                        {[1, 2, 3, 4].map(i => (
+                            <FeaturedMovie
+                                name={"Batman " + i}
+                                category="Action"
+                                key={i}
+                                slug="batman"
+                                thumbnail={"/images/featured-1.png"}
+                                rating={i + 1}
+                            />
+                        ))}
+
+                    </Flickity>
                 </div>
-            </div>
-        </Authenticated>
-    );
+                <div>
+                    <div className="font-semibold text-[22px] text-black mb-4">Browse</div>
+                    <Flickity elementType={'div'} // default 'div'
+                        options={flickityOptions} // takes flickity options {}
+                        disableImagesLoaded={false} // default false
+                        reloadOnUpdate // default false
+                        static // default false
+                    >
+                        {[1, 2, 3, 4, 5].map(i => (
+                            <MovieCard
+                                name={`Meong ${i}`}
+                                key={i}
+                                thumbnail={`/images/browse-1.png`}
+                                year={2022}
+                                slug={"batman"}
+                            />
+                        ))}
+                    </Flickity>
+                </div>
+            </Authenticated>
+        </>
+    )
 }
+export default memo(Dashboard)
