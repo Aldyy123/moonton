@@ -19,7 +19,7 @@ use Inertia\Inertia;
 Route::redirect('/', '/login');
 
 Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('dashboard')->group(function () {
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index'])->name('user.dashboard');
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function () {
