@@ -15,10 +15,10 @@ use Inertia\Inertia;
 |
 */
 
-Route::redirect('/', '/prototype/login');
+Route::redirect('/', '/register');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('User/Dashboard/index');
 })->name('dashboard');
 
 Route::prefix('prototype')->name('prototype.')->group(function () {
