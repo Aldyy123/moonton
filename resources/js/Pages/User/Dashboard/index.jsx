@@ -5,7 +5,7 @@ import FeaturedMovie from '@/Components/FeaturedMovie'
 import MovieCard from '@/Components/MovieCard'
 import { memo } from 'react'
 
-function Dashboard({auth}) {
+function Dashboard({auth, isFeaturedMovie, movies}) {
     const flickityOptions = {
         "cellAlign": "left",
         "contain": true,
@@ -31,14 +31,14 @@ function Dashboard({auth}) {
                         static // default false
                     >
 
-                        {[1, 2, 3, 4].map(i => (
+                        {isFeaturedMovie.map((isFeatureMovie, i) => (
                             <FeaturedMovie
-                                name={"Batman " + i}
-                                category="Action"
+                                name={isFeatureMovie.name}
+                                category={isFeatureMovie.category}
                                 key={i}
-                                slug="batman"
-                                thumbnail={"/images/featured-1.png"}
-                                rating={i + 1}
+                                slug={isFeatureMovie.slug}
+                                thumbnail={isFeatureMovie.thumbnail}
+                                rating={isFeatureMovie.rating}
                             />
                         ))}
 
@@ -52,13 +52,13 @@ function Dashboard({auth}) {
                         reloadOnUpdate // default false
                         static // default false
                     >
-                        {[1, 2, 3, 4, 5].map(i => (
+                        {movies.map((movie, i) => (
                             <MovieCard
-                                name={`Meong ${i}`}
+                                name={movie.name}
                                 key={i}
-                                thumbnail={`/images/browse-1.png`}
+                                thumbnail={movie.thumbnail}
                                 year={2022}
-                                slug={"batman"}
+                                slug={movie.slug}
                             />
                         ))}
                     </Flickity>

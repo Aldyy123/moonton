@@ -3,7 +3,7 @@ import { memo, useEffect } from "react";
 
  function Sidebar() {
     const url = usePage().url.split('/')[2];
-    console.log(url);
+    // console.log(url);
     
     return (
         <>
