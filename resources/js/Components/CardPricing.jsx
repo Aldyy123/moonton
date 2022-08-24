@@ -28,7 +28,7 @@ export default function CardPricing({
                     {/* <!-- Mid Content: Benefits --> */}
                     <div className="flex flex-col gap-4">
                         {features.map((feature, i) => (
-                            <div className="flex items-center gap-2" key={i + id}>
+                            <div className="flex items-center gap-2" key={i}>
                                 <img src="/icons/ic_tick.svg" alt="" />
                                 <span className="text-sm">
                                     {feature}
@@ -84,7 +84,7 @@ export default function CardPricing({
                     </div>
 
                     {/* <!-- Bottom: CTA Button --> */}
-                    <div>
+                    <div onClick={onSelectedSubcription}>
                         <Button type="button">
                             <span className="text-base font-semibold">Subscribe Now</span>
                         </Button>

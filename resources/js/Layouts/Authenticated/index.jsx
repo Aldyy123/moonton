@@ -8,7 +8,7 @@ function Authenticated({ children, auth }) {
         <>
             <div className="mx-auto max-w-screen hidden lg:block">
                 {/* Start : Sidebar */}
-                <Sidebar />
+                <Sidebar auth={auth} />
                 {/* End : Sidebar */}
 
                 {/* START : Content */}

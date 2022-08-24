@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SubscriptionPlan extends Model
 {
     use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'name', 'price', 'active_period_in_months', 'features'
     ];
