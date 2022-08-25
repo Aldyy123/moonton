@@ -6,16 +6,11 @@ import ValidationErrors from '@/Components/ValidationErrors';
 import Label from "@/Components/Label";
 import Button from "@/Components/Button";
 import Checkbox from "@/Components/Checkbox";
+import { Inertia } from "@inertiajs/inertia";
 
-export default function Create({ auth }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        slug: '',
-        category: '',
-        video_url: '',
-        thumbnail: '',
-        rating: '',
-        is_featured: false,
+export default function Edit({ auth, movie }) {
+    const { data, setData, processing, errors, reset } = useForm({
+        ...movie
     });
 
     useEffect(() => {
@@ -30,18 +25,24 @@ export default function Create({ auth }) {
 
     const submit = (e) => {
         e.preventDefault();
+        if (data.thumbnail === movie.thumbnail) {
+            delete data.thumbnail
+        }
 
-        post(route('admin.dashboard.movie.store'));
+        Inertia.post(route('admin.dashboard.movie.update', movie.id), {
+            _method: 'PUT',
+            ...data
+        });
     };
 
     return (
         <>
-            <Head title="Admin - Create a Movie" />
+            <Head title="Admin - Update a Movie" />
             <Authenticated auth={auth}>
                 <Link href={route('admin.dashboard.movie.index')} className="bg-alerange p-2 rounded-md text-white">
                     Kembali
                 </Link>
-                <h2 className="text-center font-bold text-xl">Create New Movie</h2>
+                <h2 className="text-center font-bold text-xl">Update Movie {movie.name}</h2>
                 <hr className="mb-4" />
                 <ValidationErrors errors={errors} />
                 <form onSubmit={submit} encType="multipart/form-data">
@@ -51,7 +52,7 @@ export default function Create({ auth }) {
                             <Input type="text"
                                 variant="primary-outline"
                                 placeholder="Insert name movie..."
-                                value={data.name}
+                                defaultValue={movie.name}
                                 name="name"
                                 isError={errors.name}
                                 handleChange={onHandleChange}
@@ -62,7 +63,7 @@ export default function Create({ auth }) {
                             <Input type="text"
                                 variant="primary-outline"
                                 placeholder="Insert Category Movie..."
-                                value={data.category}
+                                defaultValue={movie.category}
                                 name="category"
                                 isError={errors.category}
                                 handleChange={onHandleChange}
@@ -73,7 +74,7 @@ export default function Create({ auth }) {
                             <Input type="text"
                                 variant="primary-outline"
                                 placeholder="Insert Video URL..."
-                                value={data.video_url}
+                                defaultValue={movie.video_url}
                                 name="video_url"
                                 isError={errors.video_url}
                                 handleChange={onHandleChange}
@@ -83,7 +84,7 @@ export default function Create({ auth }) {
                             <Label forInput={'rating'} value="Rating" />
                             <Input type="number"
                                 variant="primary-outline"
-                                value={data.rating}
+                                defaultValue={movie.rating}
                                 name="rating"
                                 isError={errors.rating}
                                 handleChange={onHandleChange}
@@ -91,6 +92,7 @@ export default function Create({ auth }) {
                         </div>
                         <div className="w-11/12 my-2">
                             <Label forInput={'thumbnail'} value="Thumbnail" />
+                            <img src={`/storage/${movie.thumbnail}`} alt={movie.name} className="w-48" />
                             <Input type="file"
                                 variant="primary-outline"
                                 name="thumbnail"
@@ -101,6 +103,7 @@ export default function Create({ auth }) {
                         <div className="w-11/12 my-2 flex items-center gap-2 flex-row-reverse justify-end">
                             <Label forInput={'is_featured'} value="Is Featured" className={'mt-2'} />
                             <Checkbox
+                                checked={movie.is_featured}
                                 name={'is_featured'}
                                 handleChange={(e) => setData('is_featured', e.target.checked)}
                             />
