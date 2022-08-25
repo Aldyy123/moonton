@@ -1,7 +1,7 @@
-@import 'input.css';
 @import 'button.css';
 @import 'sidebar.css';
 @import 'pricing.css';
+@import 'input.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,7 +30,7 @@
     [multiple],
     textarea,
     select {
-        border-color: transparent !important;
+        border-color: transparent;
     }
 
     [type='text']:focus,
@@ -48,7 +48,7 @@
     [multiple]:focus,
     textarea:focus,
     select:focus {
-        border-color: transparent !important;
-        --tw-ring-color: transparent !important;
+        border-color: transparent;
+        --tw-ring-color: transparent;
     }
 }
