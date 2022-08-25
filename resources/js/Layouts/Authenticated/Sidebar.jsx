@@ -7,7 +7,6 @@ import SubscriptionDetail from "./SubscriptionDetail";
 function Sidebar({ auth }) {
     const url = usePage().url.split('/')[2];
     // console.log(url);
-    console.log(auth);
     return (
         <>
             <aside className="fixed z-50 w-[300px] h-full">
